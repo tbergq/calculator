@@ -6,13 +6,11 @@ import validate from './middleware/validation';
 const app = express();
 app.use(express.json());
 
-const port = 3000;
-
 type Input = {
   input: ReadonlyArray<number>;
 };
 
-const endpointOperatorMap: Record<string, Operation> = {
+export const endpointOperatorMap: Record<string, Operation> = {
   add: '+',
   subtract: '-',
   multiply: '*',
@@ -24,9 +22,5 @@ for (const [endpoint, operator] of Object.entries(endpointOperatorMap)) {
     res.json({ sum: calculate(operator, req.body.input) });
   });
 }
-
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
-});
 
 export default app;
